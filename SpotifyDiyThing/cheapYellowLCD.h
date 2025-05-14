@@ -109,16 +109,21 @@ public:
     int barXWidth = map(clampedPercentage, 0, 100, 0, screenWidth - 40);
     // Serial.println(barXWidth);
 
-    int progressStartY = 150 + 5;
+    int progressStartY = 165;
 
     // Draw outer Rectangle, in theory we only need to do this once!
-    tft.drawRect(19, progressStartY, screenWidth - 38, 20, TFT_WHITE);
+
+    tft.fillRect(13, progressStartY-3, screenWidth - 44, 15, TFT_BLACK);
+
+    tft.drawRect(19, progressStartY, screenWidth - 38, 6, TFT_WHITE);
 
     // Draw the white portion of the filled bar
-    tft.fillRect(20, progressStartY + 1, barXWidth, 18, TFT_WHITE);
+    tft.fillRect(20, progressStartY + 1, barXWidth, 4, TFT_WHITE);
 
     // Fill whats left black
-    tft.fillRect(20 + barXWidth, progressStartY + 1, (screenWidth - 20) - (20 + barXWidth), 18, TFT_BLACK);
+    tft.fillRect(20 + barXWidth, progressStartY + 1, (screenWidth - 20) - (20 + barXWidth), 4, TFT_BLACK);
+
+    tft.fillSmoothCircle(barXWidth+25, progressStartY+3, 6, TFT_WHITE);
   }
 
   void printCurrentlyPlayingToScreen(CurrentlyPlaying currentlyPlaying)
