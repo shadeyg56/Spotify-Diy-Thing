@@ -129,27 +129,27 @@ public:
   void printCurrentlyPlayingToScreen(CurrentlyPlaying currentlyPlaying)
   {
     // Clear the text
-    int textStartY = 150 + 30;
+    int textStartY = screenHeight / 4 - 10;
     tft.fillRect(0, textStartY, screenWidth, screenHeight - textStartY, TFT_BLACK);
 
-    tft.drawCentreString(currentlyPlaying.trackName, screenCenterX, textStartY, 2);
-    tft.drawCentreString(currentlyPlaying.artists[0].artistName, screenCenterX, textStartY + 18, 2);
-    tft.drawCentreString(currentlyPlaying.albumName, screenCenterX, textStartY + 36, 2);
+    tft.drawCentreString(currentlyPlaying.trackName, screenCenterX / 2, textStartY, 2);
+    tft.drawCentreString(currentlyPlaying.artists[0].artistName, screenCenterX / 2, textStartY + 18, 2);
+    tft.drawCentreString(currentlyPlaying.albumName, screenCenterX / 2, textStartY + 36, 2);
   }
 
   void checkForInput()
   {
     if (millis() > touchScreenCoolDownTime && handleTouched())
     {
-      drawTouchButtons(previousTrackStatus, nextTrackStatus);
-      if (previousTrackStatus)
-      {
-        spotify_display->previousTrack();
-      }
-      else if (nextTrackStatus)
-      {
-        spotify_display->nextTrack();
-      }
+      // drawTouchButtons(previousTrackStatus, nextTrackStatus);
+      // if (previousTrackStatus)
+      // {
+      //   spotify_display->previousTrack();
+      // }
+      // else if (nextTrackStatus)
+      // {
+      //   spotify_display->nextTrack();
+      // }
       drawTouchButtons(false, false);
       requestDueTime = 0;                                               // Some button has been pressed and acted on, it surely impacts the status so force a refresh
       touchScreenCoolDownTime = millis() + touchScreenCoolDownInterval; // Cool the touch off
@@ -159,7 +159,7 @@ public:
   // Image Related
   void clearImage()
   {
-    int imagePosition = screenCenterX - (imageWidth / 2);
+    int imagePosition = screenCenterX - (imageWidth / 2) + 75;
     tft.fillRect(imagePosition, 0, imageWidth, imageHeight, TFT_BLACK);
   }
 
@@ -295,7 +295,7 @@ private:
     lTime = millis();
     jpeg.open((const char *)imageFileUri, myOpen, myClose, myRead, mySeek, JPEGDraw);
     jpeg.setPixelType(1);
-    int imagePosition = screenCenterX - (imageWidth / 2);
+    int imagePosition = screenCenterX - (imageWidth / 2) + 75;
     // decode will return 1 on sucess and 0 on a failure
     int decodeStatus = jpeg.decode(imagePosition, 0, JPEG_SCALE_HALF);
     // jpeg.decode(45, 0, 0);
@@ -309,7 +309,7 @@ private:
   void drawTouchButtons(bool backStatus, bool forwardStatus)
   {
 
-    int buttonCenterY = 75;
+    int buttonCenterY = 200;
     int leftButtonCenterX = 40;
     int rightButtonCenterX = screenWidth - leftButtonCenterX;
 
