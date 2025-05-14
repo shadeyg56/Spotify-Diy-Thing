@@ -1,0 +1,8 @@
+[wokwi]
+version = 1
+firmware = '.pio/build/cyd/firmware-merged.bin'
+elf = '.pio/build/cyd/firmware.elf'
+
+[[net.forward]]
+from = "localhost:8080"
+to = "target:80"
