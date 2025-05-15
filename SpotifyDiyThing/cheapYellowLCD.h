@@ -113,17 +113,21 @@ public:
 
     // Draw outer Rectangle, in theory we only need to do this once!
 
-    tft.fillRect(13, progressStartY-3, screenWidth - 44, 15, TFT_BLACK);
+    TFT_eSprite sprite = TFT_eSprite(&tft);
+    sprite.createSprite(screenWidth-44, 15);
 
-    tft.drawRect(19, progressStartY, screenWidth - 38, 6, TFT_WHITE);
+    sprite.fillRect(0, 0, screenWidth - 44, 15, TFT_BLACK);
+
+    sprite.drawRect(6, 3, screenWidth - 38, 6, TFT_WHITE);
 
     // Draw the white portion of the filled bar
-    tft.fillRect(20, progressStartY + 1, barXWidth, 4, TFT_WHITE);
+    sprite.fillRect(7, 4, barXWidth, 4, TFT_WHITE);
 
     // Fill whats left black
-    tft.fillRect(20 + barXWidth, progressStartY + 1, (screenWidth - 20) - (20 + barXWidth), 4, TFT_BLACK);
+    sprite.fillRect(7 + barXWidth, 4, (screenWidth - 20) - (20 + barXWidth), 4, TFT_BLACK);
 
-    tft.fillSmoothCircle(barXWidth+25, progressStartY+3, 6, TFT_WHITE);
+    sprite.fillSmoothCircle(barXWidth+12, 6, 6, TFT_WHITE);
+    sprite.pushSprite(13, progressStartY);
   }
 
   void printCurrentlyPlayingToScreen(CurrentlyPlaying currentlyPlaying)
